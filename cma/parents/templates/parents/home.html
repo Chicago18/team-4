@@ -6,14 +6,16 @@
 </head>
 <body>
 
-<h1>Welcome {{usr}}</h1>
+
 
 {% for usr in users %}
+<div class="container">
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Welcome {{usr}}</h1>
     <p class="lead">Here you can view your child's progress</p>
   </div>
+</div>
 </div>
 <div class="container">
 	<table class="table">
