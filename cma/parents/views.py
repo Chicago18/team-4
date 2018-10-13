@@ -1,5 +1,11 @@
 from django.shortcuts import render , redirect
 from . forms import RegisterForm , HousingForm
+from . utils import render_to_pdf
+from django.template import Context, Template
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.views.generic import View
+from . models import Household , Register
 # Create your views here.
 # This function is rendering index page
 def index(request):
@@ -11,7 +17,7 @@ def form(request):
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.save()
-			return redirect('/form-2',pk=post.pk)
+			return redirect('/house',pk=post.pk)
 	else:
 		form=RegisterForm()
 	return render(request, 'parents/forms.html',{'form':form})
@@ -26,3 +32,16 @@ def housing(request):
 	else:
 		form=HousingForm()
 	return render(request, 'parents/form_2.html',{'form':form})
+
+
+def generate_pdf(request,register_id):
+	template = get_template ('parents/invoice.html')
+	register = Register.objects.get(pk=register_id)
+	context = {
+	"register":register,
+	"houshold":Household.objects.all()
+	}
+	html = template.render(context)
+	pdf = render_to_pdf('parents/invoice.html',context)
+	return HttpResponse(pdf,content_type='application/pdf')	
+    

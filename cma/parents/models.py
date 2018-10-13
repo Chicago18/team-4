@@ -29,7 +29,7 @@ class Register(models.Model):
 	telephone = models.IntegerField()
 	is_homeless = models.BooleanField(default=False)
 	ethnicity = models.CharField(max_length=32, choices=Races, default=American)
-	gender = models.CharField(max_length=5, choices=gender, default=male)
+	gender = models.CharField(max_length=10, choices=gender, default=male)
 	birthday = models.DateField(default=False)
 	highschool_completed = models.CharField(blank=True,max_length=128)
 	disabled = models.BooleanField(default=True)
@@ -38,7 +38,7 @@ class Register(models.Model):
 	ward = models.CharField(blank=True,max_length=256)
 
 	def __str__(self):
-		return f"{self.first.upper()} - {self.last.upper()}"
+		return f"{self.id}-{self.first.upper()} - {self.last.upper()}"
 
 
 # Family Choices
@@ -103,7 +103,7 @@ class Household(models.Model):
 	employment = models.CharField(max_length=45, choices=jobs, default=pension)
 	
 	def __str__(self):
-		return f"{self.name} - {self.gender}"
+		return f"{self.id}-{self.name} - {self.gender}"
 
 # class Children(models.Model):
 # 	parent = ForeignKey(Register, on_delete=models.CASCADE, related_name="parent_name")
