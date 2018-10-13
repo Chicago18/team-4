@@ -5,7 +5,7 @@ from django.template import Context, Template
 from django.http import HttpResponse
 from django.template.loader import get_template
 from django.views.generic import View
-from . models import Household , Register
+from . models import Household , Register , Children
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -47,7 +47,7 @@ def generate_pdf(request,register_id):
 	register = Register.objects.get(pk=register_id)
 	context = {
 	"register":register,
-	"houshold":Household.objects.all()
+	"household":Household.objects.get(pk=1)
 	}
 	html = template.render(context)
 	pdf = render_to_pdf('parents/invoice.html',context)
@@ -55,8 +55,10 @@ def generate_pdf(request,register_id):
     
 def logged_in(request):
 	user = User.objects.all()
+	child = Children.objects.all()
 	context = {
-	'users':user
+	'users':user,
+	'children':child
 	}
 	return render(request,'parents/home.html',context)
    

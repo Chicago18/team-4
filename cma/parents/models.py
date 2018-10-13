@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here
 American = 'American Indian/ Alaskan Native'
@@ -103,9 +104,14 @@ class Household(models.Model):
 	employment = models.CharField(max_length=45, choices=jobs, default=pension)
 	
 	def __str__(self):
-		return f"{self.id}-{self.name} - {self.gender}"
+		return f"{self.id}-{self.name}"
 
-# class Children(models.Model):
-# 	parent = ForeignKey(Register, on_delete=models.CASCADE, related_name="parent_name")
-# 	first_name = models.CharField(max_length=64)
-# 	last_name = models.CharField(max_length=64)
+class Children(models.Model):
+	parent = models.ForeignKey(User, on_delete=models.CASCADE, related_name="parent_name")
+	first_name = models.CharField(max_length=64)
+	last_name = models.CharField(max_length=64)
+	grade = models.CharField(max_length=2)
+	school_grade = models.CharField(max_length=3)
+	def __str__(self):
+		return f"{self.first_name}-{self.last_name}"
+	
