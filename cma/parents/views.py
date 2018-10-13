@@ -5,3 +5,6 @@ from django.shortcuts import render
 
 def home(request):
 	return render(request,"parents/index.html")
+
+def grades(request):
+	return render(request,"parents/grades.html")
