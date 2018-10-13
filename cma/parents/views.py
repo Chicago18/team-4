@@ -8,3 +8,5 @@ def home(request):
 
 def grades(request):
 	return render(request,"parents/grades.html")
+
+# def 
