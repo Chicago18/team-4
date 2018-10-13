@@ -6,6 +6,14 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.views.generic import View
 from . models import Household , Register
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
+
+
+
 # Create your views here.
 # This function is rendering index page
 def index(request):
@@ -45,3 +53,10 @@ def generate_pdf(request,register_id):
 	pdf = render_to_pdf('parents/invoice.html',context)
 	return HttpResponse(pdf,content_type='application/pdf')	
     
+def logged_in(request):
+	user = User.objects.all()
+	context = {
+	'users':user
+	}
+	return render(request,'parents/home.html',context)
+   
