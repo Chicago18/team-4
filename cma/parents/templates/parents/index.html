@@ -43,7 +43,7 @@
             <input type="password" class="form-control" placeholder="Password" required="required">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            <button id="login" class="btn btn-primary btn-block">Log in</button>
              <button type="submit" class="btn btn-primary btn-block">Register for an account</button>
 
         </div>
@@ -51,5 +51,12 @@
         </div>        
     </form>
 </div>
+<!-- <script type="javascript" src="assets/js/grade.js"></script> -->
+<script type="text/javascript"> // put this in javascript file later
+    var logInButton = document.getElementById("login");
+    logInButton.addEventListener('click', function() {
+        window.location.href = "/grades";
+     }, false);
+</script>
 </body>
 </html>                                                                 
